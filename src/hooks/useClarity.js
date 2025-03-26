@@ -8,7 +8,7 @@ const useClarity = (clarityId) => {
             return;
         }
 
-        clarity.start({ projectId: clarityId });
+        clarity.init(clarityId);
 
         console.log("Microsoft Clarity inicializado com ID:", clarityId);
     }, [clarityId]);
