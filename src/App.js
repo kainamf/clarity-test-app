@@ -23,6 +23,11 @@ const App = () => {
     }
   };
 
+  const handleButtonClick = (series) => {
+    window.clarity("event", `adicionar_exercicio`, { series });
+    handleAddExercise(series);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -34,35 +39,35 @@ const App = () => {
         <WorkoutSeries
           title="Série A: Peito, Ombro"
           exercises={workouts.A}
-          onAddExercise={() => handleAddExercise("A")}
+          onAddExercise={() => handleButtonClick("A")}
         />
 
         {/* Série B */}
         <WorkoutSeries
           title="Série B: Posterior e Glúteo"
           exercises={workouts.B}
-          onAddExercise={() => handleAddExercise("B")}
+          onAddExercise={() => handleButtonClick("B")}
         />
 
         {/* Série C */}
         <WorkoutSeries
           title="Série C: Costas, Trapézio"
           exercises={workouts.C}
-          onAddExercise={() => handleAddExercise("C")}
+          onAddExercise={() => handleButtonClick("C")}
         />
 
         {/* Série D */}
         <WorkoutSeries
           title="Série D: Quadríceps e Panturrilha"
           exercises={workouts.D}
-          onAddExercise={() => handleAddExercise("D")}
+          onAddExercise={() => handleButtonClick("D")}
         />
 
         {/* Série E */}
         <WorkoutSeries
           title="Série E: Bíceps e Tríceps"
           exercises={workouts.E}
-          onAddExercise={() => handleAddExercise("E")}
+          onAddExercise={() => handleButtonClick("E")}
         />
       </div>
     </div>
