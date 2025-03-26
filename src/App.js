@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import clarity from "@microsoft/clarity";
 import useClarity from "./hooks/useClarity";
 
 const App = () => {
