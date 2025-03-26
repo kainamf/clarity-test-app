@@ -19,7 +19,7 @@ const App = () => {
         ...prevWorkouts,
         [series]: [...prevWorkouts[series], exercise]
       }));
-      window.clarity("event", `exercicio_adicionado_${series}`);
+      window.clarity("event", `exercicio_adicionado`, { series, exercise });
     }
   };
 
