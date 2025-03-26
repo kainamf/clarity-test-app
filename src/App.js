@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import useClarity from "./hooks/useClarity";
 
 const App = () => {
-  useClarity(qucfcofrn4);
+  useClarity("qucfcofrn4");
 
   const [count, setCount] = useState(0);
   const [inputValue, setInputValue] = useState("");
