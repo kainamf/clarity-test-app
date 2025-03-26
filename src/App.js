@@ -5,60 +5,91 @@ import useClarity from "./hooks/useClarity";
 const App = () => {
   useClarity("qucfcofrn4");
 
-  const [count, setCount] = useState(0);
-  const [inputValue, setInputValue] = useState("");
+  const [workouts, setWorkouts] = useState({
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: []
+  });
+
+  const handleAddExercise = (series) => {
+    const exercise = prompt("Digite o nome do exercício:");
+    if (exercise) {
+      setWorkouts((prevWorkouts) => ({
+        ...prevWorkouts,
+        [series]: [...prevWorkouts[series], exercise]
+      }));
+      window.clarity("event", `exercicio_adicionado_${series}`);
+    }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-lg text-center">
-        <h1 className="text-2xl font-bold mb-2">Teste do Microsoft Clarity</h1>
-        <p className="text-gray-600 mb-4">Interaja com os elementos abaixo e verifique no Clarity.</p>
+    <div className="min-h-screen bg-gray-100 p-4">
+      <div className="max-w-4xl mx-auto space-y-8">
+        <h1 className="text-4xl font-bold text-center text-indigo-600 mb-6">
+          Planejamento de Treino
+        </h1>
 
-        {/* Botões */}
-        <div className="flex gap-4 justify-center mb-4">
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-            onClick={() => clarity.event("botao_azul_clicado")}
-          >
-            Botão Azul
-          </button>
+        {/* Série A */}
+        <WorkoutSeries
+          title="Série A: Peito, Ombro"
+          exercises={workouts.A}
+          onAddExercise={() => handleAddExercise("A")}
+        />
 
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
-            onClick={() => clarity.event("botao_verde_clicado")}
-          >
-            Botão Verde
-          </button>
-        </div>
+        {/* Série B */}
+        <WorkoutSeries
+          title="Série B: Posterior e Glúteo"
+          exercises={workouts.B}
+          onAddExercise={() => handleAddExercise("B")}
+        />
 
-        {/* Contador */}
-        <div className="mb-4">
-          <p className="text-gray-700">Contador: <span className="font-semibold">{count}</span></p>
-          <button
-            className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition"
-            onClick={() => {
-              setCount(count + 1);
-              clarity.event("contador_incrementado");
-            }}
-          >
-            Incrementar
-          </button>
-        </div>
+        {/* Série C */}
+        <WorkoutSeries
+          title="Série C: Costas, Trapézio"
+          exercises={workouts.C}
+          onAddExercise={() => handleAddExercise("C")}
+        />
 
-        {/* Campo de input */}
-        <div>
-          <input
-            type="text"
-            className="w-full border p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Digite algo..."
-            value={inputValue}
-            onChange={(e) => {
-              setInputValue(e.target.value);
-              clarity.event("input_digitado");
-            }}
-          />
-        </div>
+        {/* Série D */}
+        <WorkoutSeries
+          title="Série D: Quadríceps e Panturrilha"
+          exercises={workouts.D}
+          onAddExercise={() => handleAddExercise("D")}
+        />
+
+        {/* Série E */}
+        <WorkoutSeries
+          title="Série E: Bíceps e Tríceps"
+          exercises={workouts.E}
+          onAddExercise={() => handleAddExercise("E")}
+        />
       </div>
+    </div>
+  );
+};
+
+// Componente para cada série de treino
+const WorkoutSeries = ({ title, exercises, onAddExercise }) => {
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold text-indigo-500">{title}</h2>
+      <ul className="mt-4 space-y-2">
+        {exercises.length === 0 ? (
+          <li className="text-gray-500">Nenhum exercício adicionado</li>
+        ) : (
+          exercises.map((exercise, index) => (
+            <li key={index} className="text-gray-700">{exercise}</li>
+          ))
+        )}
+      </ul>
+      <button
+        className="mt-4 w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600"
+        onClick={onAddExercise}
+      >
+        Adicionar Exercício
+      </button>
     </div>
   );
 };
