@@ -7,10 +7,6 @@ const App = () => {
   const [count, setCount] = useState(0);
   const [inputValue, setInputValue] = useState("");
 
-  const handleButtonClick = (buttonName) => {
-    window.clarity("event", `botao_${buttonName}_clicado`);
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-lg text-center">
@@ -21,14 +17,14 @@ const App = () => {
         <div className="flex gap-4 justify-center mb-4">
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-            onClick={() => handleButtonClick("azul")}
+            onClick={() => clarity.event("botao_azul_clicado")}
           >
             Botão Azul
           </button>
 
           <button
             className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
-            onClick={() => handleButtonClick("verde")}
+            onClick={() => clarity.event("botao_verde_clicado")}
           >
             Botão Verde
           </button>
@@ -41,7 +37,7 @@ const App = () => {
             className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition"
             onClick={() => {
               setCount(count + 1);
-              handleButtonClick("contador");
+              clarity.event("contador_incrementado");
             }}
           >
             Incrementar
@@ -57,7 +53,7 @@ const App = () => {
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
-              window.clarity("event", "input_digitado");
+              clarity.event("input_digitado");
             }}
           />
         </div>
